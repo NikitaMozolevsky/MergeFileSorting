@@ -1,5 +1,9 @@
 package service;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,12 +12,16 @@ import java.util.stream.Collectors;
 
 public class DataSorter {
 
+    public static final Logger logger = LogManager.getLogger();
+
     public static List<String> dataSorter(boolean isInteger, boolean inAscending, List<String>... lists) {
 
         List<String> resultList = new ArrayList<>();
 
         // TODO: 1/30/2023 May be incorrect!!!
         List<String> stringList = Arrays.stream(lists).flatMap(Collection::stream).toList();
+
+        logger.log(Level.INFO, stringList);
 
         for (List<String> list : lists) {
             for (String s : list) {

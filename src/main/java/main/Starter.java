@@ -6,8 +6,10 @@ import file_reader.ReadDataFromFile;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import service.DataSorter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Starter {
 
@@ -25,7 +27,13 @@ public class Starter {
 
         String firstInFileName = inFileNames.get(0);
 
-        List<String> fileData = ReadDataFromFile.fileForDataSorting(firstInFileName);
+        List<String> firstFileData = ReadDataFromFile.fileForDataSorting(firstInFileName);
+
+        List<List<String>> filesData = inFileNames
+                .stream().map(ReadDataFromFile::fileForDataSorting)
+                .toList();
+
+        List<String> resultList = DataSorter.dataSorter(parameterList.isInteger(), parameterList.isAscending(), firstFileData);
 
     }
 
