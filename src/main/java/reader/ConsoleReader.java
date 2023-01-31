@@ -1,4 +1,4 @@
-package console_reader;
+package reader;
 
 import entity.ParameterList;
 import org.apache.logging.log4j.Level;
